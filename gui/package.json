@@ -1,0 +1,26 @@
+{
+  "name": "parallel-kernel-convolutions-gui",
+  "version": "1.0.0",
+  "description": "Image Kernel Convolutions in Parallel using both Python and OpenMP (COEN 145/319 project)",
+  "main": "index.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jacksonjw12/Parallel-Kernel-Convolutions.git"
+  },
+  "author": "Jackson Wheeler",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jacksonjw12/Parallel-Kernel-Convolutions/issues"
+  },
+  "homepage": "https://github.com/jacksonjw12/Parallel-Kernel-Convolutions#readme",
+  "devDependencies": {
+    "electron": "^9.0.0"
+  },
+  "dependencies": {
+    "jimp": "^0.12.1"
+  }
+}

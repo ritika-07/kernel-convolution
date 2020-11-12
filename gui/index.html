@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Image Kernel Convolutions</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <div class="TopBar">
+        <p class="Title">Image Kernel Convolutions</p>
+
+    </div>
+    <div class="MainContentContainer">
+        <div id="LeftContainer" class="LeftContainer Container">
+            <div id="dragMask" class="DragMask" style="display:none"></div>
+            <div id="leftContainerInstruction" class="Instructions">
+<!--                <p class="Instruction"></p>-->
+                <button onclick="openFileSelectDialog()">Upload an Image(or Drag/Drop)</button>
+            </div>
+            <div id="leftImageContainer" class="ImageContainer" style="display:none">
+
+            </div>
+        </div>
+
+        <div class="RightContainer Container">
+            <div class="FullSizeContentTab" id="parameters" >
+
+                <div class="Instructions">
+                    <p class="Instruction">Specify parameters</p>
+
+                </div>
+                <div class="KernelSelector">
+                    <select id="kernelSizeSelector" onchange="changeKernelSize()">
+                        <option value="3">3X3 Kernel</option>
+                        <option value="5">5X5 Kernel</option>
+                    </select>
+                    <select id="kernelPresetSelector" onchange="setKernelPreset()">
+                        <option value="" selected="selected">Presets</option>
+                        <option value="g3">Gaussian Blur 3x3</option>
+                        <option value="g5">Gaussian Blur 5x5</option>
+                        <option value="b3">Box Blur 3x3</option>
+                        <option value="b5">Box Blur 5x5</option>
+                        <option value="e3-1">Edge Detect 1 3x3</option>
+                        <option value="e3-2">Edge Detect 2 3x3</option>
+                        <option value="e3-3">Edge Detect 3 3x3</option>
+                        <option value="s3">Sharpen 3x3</option>
+                        <option value="us5">Unsharp Mask 5x5</option>
+                        <option value="em3">Emboss 3x3</option>
+                    </select>
+                </div>
+
+                <div class="KernelContainer">
+
+                    <div id="threeKernel" class="Kernel" >
+                        <div id="k3row1" class="KernelRow">
+                            <input id="k3row1col1" class="kInput" type="number">
+                            <input id="k3row1col2" class="kInput" type="number">
+                            <input id="k3row1col3" class="kInput" type="number">
+                        </div>
+                        <div id="k3row2" class="KernelRow">
+                            <input id="k3row2col1" class="kInput" type="number">
+                            <input id="k3row2col2" class="kInput" type="number" >
+                            <input id="k3row2col3" class="kInput" type="number" >
+                        </div>
+                         <div id="k3row3" class="KernelRow">
+                            <input id="k3row3col1" class="kInput" type="number">
+                            <input id="k3row3col2" class="kInput" type="number" >
+                            <input id="k3row3col3" class="kInput" type="number" >
+                        </div>
+                    </div>
+                    <div id="fiveKernel" class="Kernel" style="display:none;">
+                        <div id="k5row1" class="KernelRow">
+                            <input id="k5row1col1" class="kInput" type="number">
+                            <input id="k5row1col2" class="kInput" type="number">
+                            <input id="k5row1col3" class="kInput" type="number">
+                            <input id="k5row1col4" class="kInput" type="number">
+                            <input id="k5row1col5" class="kInput" type="number">
+                        </div>
+                        <div id="k5row2" class="KernelRow">
+                            <input id="k5row2col1" class="kInput" type="number">
+                            <input id="k5row2col2" class="kInput" type="number" >
+                            <input id="k5row2col3" class="kInput" type="number" >
+                            <input id="k5row2col4" class="kInput" type="number">
+                            <input id="k5row2col5" class="kInput" type="number">
+                        </div>
+                         <div id="k5row3" class="KernelRow">
+                            <input id="k5row3col1" class="kInput" type="number" >
+                            <input id="k5row3col2" class="kInput" type="number" >
+                            <input id="k5row3col3" class="kInput" type="number" >
+                            <input id="k5row3col4" class="kInput" type="number">
+                            <input id="k5row3col5" class="kInput" type="number">
+                        </div>
+                        <div id="k5row4" class="KernelRow">
+                            <input id="k5row4col1" class="kInput" type="number" >
+                            <input id="k5row4col2" class="kInput" type="number" >
+                            <input id="k5row4col3" class="kInput" type="number" >
+                            <input id="k5row4col4" class="kInput" type="number">
+                            <input id="k5row4col5" class="kInput" type="number">
+                        </div>
+                        <div id="k5row5" class="KernelRow">
+                            <input id="k5row5col1" class="kInput" type="number" >
+                            <input id="k5row5col2" class="kInput" type="number" >
+                            <input id="k5row5col3" class="kInput" type="number" >
+                            <input id="k5row5col4" class="kInput" type="number">
+                            <input id="k5row5col5" class="kInput" type="number">
+                        </div>
+
+
+
+                    </div>
+
+                </div> 
+                <div class="NumThreadsSelectorContainer">
+                    <div class="NumThreadsSelector">
+                        <div class="NumThreadsLabel"><p>Num Threads(1-64): </p></div>
+                        <input id="numThreadsInput" class="NumThreadsInput" value="1" onchange="updateNumThreads()"  type="number">
+
+                    </div>
+                    <div class="NumThreadsSelector">
+
+                        <div class="GreyScaleLabel"><p>Make GreyScale: </p><input id="greyScaleInput" class="NumThreadsInput"  type="checkbox"></div>
+
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="FullSizeContentTab" id="imageResults" style="display:none">
+                <div class="Instructions">
+                    <button onclick="clearResultImage()">Change Parameters</button>
+                </div>
+                <div id="rightImageContainer" class="ImageContainer" >
+                </div>
+            </div>
+        </div>
+        <div class="Separator">
+            <div class="Arrow" style="display:none">
+                <div class="Arrow_Head"></div>
+                <div class="Arrow_Tail"></div>
+                <div class="Arrow_Instructions">
+                    <p class="Instruction Arrow_Instruction">3. Go!</p>
+                </div>
+            </div>
+            <button onclick="performFilter()">Perform Filter</button>
+            <div class="TimingData">
+                <p id="OMPTiming"></p>
+                <p id="pythonTiming"></p>
+                <p id="resultsDiff"></p>
+            </div>
+<!--            <button onclick="clearFiles()">Change Kernel Values</button>-->
+
+        </div>
+
+    </div>
+    <div class="Footer">
+        <p class="Authors">Ritika &nbsp;&nbsp;|&nbsp;&nbsp; Nitish &nbsp;&nbsp;|&nbsp;&nbsp; Tanya &nbsp;&nbsp;|&nbsp;&nbsp; Allen &nbsp;&nbsp;|&nbsp;&nbsp; Siddharth</p> <br>
+
+    </div>
+</body>
+    <script src="main.js"></script>
+
+</html>
